@@ -1,0 +1,48 @@
+﻿@using WebASPPetProj.Models
+@model MainView
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="container top-buffer">
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="panel panel-default">
+                <h3 class="panel-heading panel-title">Categories:</h3>
+                <ul class="list-group panel-body">
+                    @foreach (var item in Model.Categories)
+                    {
+                    <li class="list-group-item">@item.Name</li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-9 " style="margin-right:auto;">
+            @foreach (Post item in Model.Posts)
+            {
+                <div class="panel panel-default" style="max-width:90%;">
+                    <p class="panel-heading panel-title">@item.Title</p>
+                    <div class="panel-info" style="color:dimgrey">
+                        <div class="col-lg-4">
+                            <span>Category:@item.Category.Name</span> @*<span> Tags:@item.Tags.ToString()</span>*@
+                        </div>
+                        <div class="text-right">
+                            <span>@item.PostedOn.ToString("dd/MM/yy")</span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <span>@item.ShortDescription</span>
+                    </div>
+
+
+                    <div class="panel-footer">
+                        <input type="button" class="btn btn-default" value="Read more..." />
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+    
