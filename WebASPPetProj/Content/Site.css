@@ -41,4 +41,40 @@ textarea {
     max-width: 100%;
     min-width: 100%;
 }
+.l-r-buffer{
+    padding-left:30px;
+    padding-right:30px;
+}
 
+.Posts-view {
+    max-width: 90%;
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #d3d3d3;
+    border-radius:5px;
+    padding-bottom:5px;
+}
+    .Posts-view .post-title{
+        padding-top:10px;
+        padding-bottom:10px;
+    } 
+    .Posts-view .post-title a {
+        padding-left: 40px;
+        color: #0a0842;
+    }
+    .Posts-view .post-content {
+        background-color: #e0e0e0;
+        padding: 20px;
+    }
+        .Posts-view .post-footer a {
+            color: #0a0842;
+        }
+.Category-list li{
+    background-color: #f4f4f4
+}
+    .Category-list a {
+        color: #0a0842;
+    }
+    .Category-list li:hover {
+        background-color: #e0e0e0;
+    }

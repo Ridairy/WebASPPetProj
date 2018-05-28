@@ -1,7 +1,39 @@
-﻿
-@{
-    ViewBag.Title = "ShowPost";
-}
+﻿@using WebASPPetProj.Models
+@model WebASPPetProj.Models.PostView
 
-<h2>ShowPost</h2>
+@{
+    ViewBag.Title = @Model.Title;
+}
+  
+        <div class="container" style="max-width:90%;">
+            <nav aria-label="breadcrumb" style="max-width:90%;">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item">@Html.ActionLink(@Model.Category.Name, Model.Category.ShortUrl, "showpost/")</li>
+                    <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+                </ol>
+            </nav>
+            <div style="max-width:90%;">
+                <h1>@Model.Title</h1>
+                <div class="row" style="color:dimgrey">
+                    <div class="col-lg-10">
+
+                        By: @Model.Publisher.UserName |
+                        Category: @Html.ActionLink(@Model.Category.Name, Model.Category.ShortUrl, "showpost/") | Tags:
+                        @foreach (Tag t in Model.Tags)
+                        {
+                            <span class="label label-info">@t.Name</span>
+                        }
+                    </div>
+                    <div class="text-left col-lg-2">
+                        <span>@Model.PostedOn.ToString("dd/MM/yy")</span>
+                    </div>
+                </div>
+                <hr />
+                <p>@Html.Raw(Model.Description)</p>
+            </div>
+            
+        </div>
+
+
 

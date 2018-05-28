@@ -1,0 +1,39 @@
+﻿
+@using WebASPPetProj.Models
+@model WebASPPetProj.Models.CategoriesView
+@using WebASPPetProj.Helpers;
+@{
+    ViewBag.Title = "Category";
+}
+@Html.AntiForgeryToken()
+<div class="container" style="padding-top:20px">
+    <div class="row">
+        <div class="col-12">
+            <h2>Categories:</h2>
+            <ul class="list-group">
+                @foreach (Category c in Model.Categories)
+                {
+                    <li class="list-group-item form-group form-inline ">
+                        <input id="Name @c.Id" class="col-2 form-control" type="text" value="@c.Name" />
+                        <input id="Descr @c.Id" class="form-control" type="text" value="@c.Description">
+                        <input class="form-control btn" type="button" onclick="Change('category',@c.Id)" value="Edit" />
+                        <input class="form-control btn" type="button" onclick="Delete('category',@c.Id)" value="Delete" />
+                    </li>
+                }
+                    <li class="list-group-item form-group form-inline ">
+                        <input id="NewName" class="col-2 form-control" type="text" />
+                        <input id="NewDescr" class="form-control" type="text" />
+                        <input class="form-control btn" type="button" onclick="Create('category')" value="Create new" />
+                    </li>
+            </ul>
+            
+            <div class="btn-group top-buffer">
+                @Html.PageLinks(Model.pageInfo, x => Url.Action("Category", new { page = x }))
+            </div>
+        </div>
+    </div>
+<script src="~/Scripts/CategoryTagScripts.js"></script>
+
+
+</div>
+

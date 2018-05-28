@@ -6,7 +6,8 @@ using System.Linq;
 using System.Web;
 
 namespace WebASPPetProj.Models
-{
+{ 
+    //CodeFirst model for:
     public class Post
     {
         [Key,Required]
@@ -16,10 +17,10 @@ namespace WebASPPetProj.Models
         public string Description { get; set; }
         public bool Posted { get; set; }
         public DateTime PostedOn { get; set; }
-        public ApplicationUser Publisher { get; set; }
-        public Category Category { get; set; }
-        public List<Tag> Tags { get; set; }
-
+        public virtual ApplicationUser Publisher { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual List<Tag> Tags { get; set; }
+        
         public string ShortUrl { get; set; }
     }
 
@@ -29,7 +30,7 @@ namespace WebASPPetProj.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Post> Posts { get; set; }
+        public virtual List<Post> Posts { get; set; }
 
         public string ShortUrl { get; set; }
     }
@@ -40,7 +41,7 @@ namespace WebASPPetProj.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Post> Posts { get; set; }
+        public virtual List<Post> Posts { get; set; }
 
        // public string ShortUrl { get; set; }
     }

@@ -1,7 +1,54 @@
-﻿
+﻿@using WebASPPetProj.Helpers
+@model WebASPPetProj.Models.CategoryView
+@using WebASPPetProj.Models
 @{
-    ViewBag.Title = "ShowAllInCategory";
+    ViewBag.Title = Model.CurrCategory.Name;
 }
 
-<h2>ShowAllInCategory</h2>
+<div class="container" style="max-width:90%;">
+    <nav aria-label="breadcrumb" style="max-width:90%;">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.CurrCategory.Name</li>
+        </ol>
+    </nav>
+    <div>
+        @foreach (Post item in Model.Posts)
+         {
+        <div class="Posts-view">
+            <h3 class="post-title border-bottom"><a href="/showpost/@item.Category.ShortUrl/@item.ShortUrl">@item.Title</a></h3>
+            <div class="row l-r-buffer" style="color:dimgrey">
+                <div class="col-lg-10">
+                    <p>
+                        <span>Category:@Html.ActionLink(@item.Category.Name, item.Category.ShortUrl, "showpost/") | </span><span>
+                            Tags:
+                            @foreach (Tag m in item.Tags)
+                            {
+                            <span class="badge badge-info">@m.Name</span>
+                            }
+                        </span>
+                    </p>
+                </div>
+                <div class="text-right col-lg-2">
+                    <span>@item.PostedOn.ToString("dd/MM/yy")</span>
+                </div>
+            </div>
+            <div class="border-top border-bottom post-content">
+                <span>@item.ShortDescription</span>
+            </div>
 
+
+            <div class="post-footer mr-auto">
+                <a href="/showpost/@item.Category.ShortUrl/@item.ShortUrl">
+                    <input type="button" class="btn btn-default" value="Read more..." />
+                </a>
+            </div>
+        </div>
+
+        }
+        <br/>
+        <div class="btn-group">
+            @Html.PageLinks(Model.PageInfo, x => ("/showpost/" + Model.CurrCategory.ShortUrl) + "?page=" + x)
+        </div>
+    </div>
+</div>

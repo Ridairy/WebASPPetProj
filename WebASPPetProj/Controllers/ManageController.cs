@@ -10,6 +10,7 @@ using WebASPPetProj.Models;
 
 namespace WebASPPetProj.Controllers
 {
+
     [Authorize]
     public class ManageController : Controller
     {

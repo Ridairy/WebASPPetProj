@@ -13,7 +13,7 @@ using WebASPPetProj;
 
 namespace WebASPPetProj.Controllers
 {
-    //Account controller
+    //Default account controller
     [Authorize]
     public class AccountController : Controller
     {
@@ -422,6 +422,18 @@ namespace WebASPPetProj.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        [AllowAnonymous]
+        [Route("user/{username}")]
+        public ActionResult ShowUserInfo(string username)
+        {
+            if (User.Identity.Name == username)
+            {
+                return RedirectToAction("Index", "Manage");
+            }
+
+            return View();
         }
 
         #region Helpers

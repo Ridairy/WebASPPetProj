@@ -6,6 +6,7 @@ using Microsoft.Owin.Security;
 
 namespace WebASPPetProj.Models
 {
+    //Show and edit user info models
     public class IndexViewModel
     {
         public string UserName { get; set; }

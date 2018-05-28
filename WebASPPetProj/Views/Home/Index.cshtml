@@ -1,48 +1,55 @@
-﻿@using WebASPPetProj.Models
+﻿@using WebASPPetProj.Models;
+@using WebASPPetProj.Helpers;
 @model MainView
 
 @{
     ViewBag.Title = "Home Page";
 }
-<div class="container top-buffer">
-    <div class="row">
-        <div class="col-lg-2">
-            <div class="panel panel-default">
-                <h3 class="panel-heading panel-title">Categories:</h3>
-                <ul class="list-group panel-body">
-                    @foreach (var item in Model.Categories)
-                    {
-                    <li class="list-group-item">@item.Name</li>
+<div class="container" style="max-width:90%;">
+
+    <div style="">
+        <nav aria-label="breadcrumb" style="max-width:90%;">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Home</li>
+            </ol>
+        </nav>
+        @foreach (Post item in Model.Posts)
+    {
+        <div class="Posts-view">
+            <h3 class="post-title border-bottom"><a href="/showpost/@item.Category.ShortUrl/@item.ShortUrl">@item.Title</a></h3>
+            <div class="row l-r-buffer" style="color:dimgrey">
+                <div class="col-lg-10">
+                    <p>
+                        <span>Category:@Html.ActionLink(@item.Category.Name, item.Category.ShortUrl, "showpost/") | </span><span>
+                            Tags:
+                            @foreach (Tag m in item.Tags)
+                        {
+                            <span class="badge badge-info">@m.Name</span>
                     }
-                </ul>
+                        </span>
+                    </p>
+                </div>
+                <div class="text-right col-lg-2">
+                    <span>@item.PostedOn.ToString("dd/MM/yy")</span>
+                </div>
+            </div>
+            <div class="border-top border-bottom post-content">
+                <span>@item.ShortDescription</span>
+            </div>
+
+
+            <div class="post-footer mr-auto">
+                <a href="/showpost/@item.Category.ShortUrl/@item.ShortUrl">
+                    <input type="button" class="btn btn-default" value="Read more..." />
+                </a>
             </div>
         </div>
 
-        <div class="col-lg-9 " style="margin-right:auto;">
-            @foreach (Post item in Model.Posts)
-            {
-                <div class="panel panel-default" style="max-width:90%;">
-                    <p class="panel-heading panel-title">@item.Title</p>
-                    <div class="panel-info" style="color:dimgrey">
-                        <div class="col-lg-4">
-                            <span>Category:@item.Category.Name</span> @*<span> Tags:@item.Tags.ToString()</span>*@
-                        </div>
-                        <div class="text-right">
-                            <span>@item.PostedOn.ToString("dd/MM/yy")</span>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <span>@item.ShortDescription</span>
-                    </div>
+}
+        <br />
+        <div class="btn-group">
+            @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x }))
 
-
-                    <div class="panel-footer">
-                        <input type="button" class="btn btn-default" value="Read more..." />
-                    </div>
-                </div>
-
-            }
+        </div>
         </div>
     </div>
-</div>
-    

@@ -10,12 +10,19 @@ namespace WebASPPetProj.Controllers
 {
     public class HomeController : Controller
     {
+        //Show all posts
         ApplicationDbContext db = new ApplicationDbContext();
-        public ActionResult Index()
+        public ActionResult Index(int page=1)
         {
-            MainView model = new MainView();
-            model.Categories = db.Categories.ToList<Category>();
-            model.Posts = db.Posts.ToList<Post>();
+            int pageSize = 5;
+            //Get posts on this page
+            IEnumerable<Post> postPerPage = db.Posts.OrderByDescending(p=>p.PostedOn).Skip((page - 1) * pageSize).Take(pageSize);
+            PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = db.Posts.Count() };
+            MainView model = new MainView
+            {
+                Posts = postPerPage.ToList(),
+                PageInfo = pageInfo
+            };
             return View(model);
         }
 

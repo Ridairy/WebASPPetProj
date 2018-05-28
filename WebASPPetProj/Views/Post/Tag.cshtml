@@ -1,0 +1,38 @@
+﻿@using WebASPPetProj.Models;
+@model WebASPPetProj.Models.TagsView
+@using WebASPPetProj.Helpers;
+
+@{
+    ViewBag.Title = "Tag";
+}
+@Html.AntiForgeryToken()
+<div class="container" style="padding-top:20px">
+    <div class="row">
+        <div class="col-12">
+            <h2>Tags:</h2>
+            <ul class="list-group">
+                @foreach (Tag t in Model.Tags)
+                {
+                    <li class="list-group-item form-group form-inline ">
+                        <input id="Name @t.Id" class="col-2 form-control" type="text" value="@t.Name" />
+                        <input id="Descr @t.Id" class="form-control" type="text" value="@t.Description">
+                        <input class="form-control btn" type="button" onclick="Change('tag',@t.Id)" value="Edit" />
+                        <input class="form-control btn" type="button" onclick="Delete('tag',@t.Id)" value="Delete" />
+                    </li>
+                }
+                <li class="list-group-item form-group form-inline ">
+                    <input id="NewName" class="col-2 form-control" type="text" />
+                    <input id="NewDescr" class="form-control" type="text" />
+                    <input class="form-control btn" type="button" onclick="Create('Tag')" value="Create new" />
+                </li>
+            </ul>
+
+            <div class="btn-group top-buffer">
+                @Html.PageLinks(Model.pageInfo, x => Url.Action("Tag", new { page = x }))
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/CategoryTagScripts.js"></script>
+
+
